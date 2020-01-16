@@ -11,5 +11,3 @@ public class Main {
 
     }
 }
-
-//SpringApplication.run(AccessingDataMysqlApplication.class, args);

@@ -1,7 +1,9 @@
 package springboot.api;
 
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,8 @@ import java.util.Optional;
 @RequestMapping(path="/student")
 public class Api {
 
-    private final static Logger LOG = Logger.getLogger(Api.class);
+
+    private final static Logger LOG = LoggerFactory.getLogger(Api.class);
 
     @Autowired
     private static StudentRepository repository;
@@ -60,6 +63,8 @@ public class Api {
     public ResponseEntity<Object> getAllStudents() {
         LOG.debug("Received GET all students request");
 
+
+        System.out.println(repository);
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 

@@ -1,0 +1,71 @@
+Introduction:
+This is a very simple demo API that allows the user to interact with one table in a MySql database.
+
+---------------------------------------------------------------------------------------------------------
+Preparation:
+
+This program can only be run on a machine with Java 9 or higher installed.
+
+The program assumes that the user has already set up a MySql database that it can interact with. To configure your
+database, open MySql Workbench, or another similar database design tool, and run the following two queries:
+
+    CREATE DATABASE my_database;
+
+    CREATE TABLE my_database.Students (
+        id INT(6) UNSIGNED PRIMARY KEY,
+        name VARCHAR(50),
+        email VARCHAR(50)
+    );
+
+---------------------------------------------------------------------------------------------------------
+Starting the program:
+
+In order to start the program, the following parameters must be set via the terminal. If the parameters are not defined,
+the default values will be used instead.
+
+server.port:       The port which the program should run on.            Default: 8080
+database.ip:       The ip of the MySql database.                        Default: localhost
+database.port:     The port of the database.                            Default: 3306
+database.user:     A user with correct access rights to the database.   Default: root
+database.password: The password of the database user.                   Default: password
+database.name:     The name of the MySql database.                      Default: my_database
+
+Run with maven:
+  - Open terminal
+  - Navigate to the project root folder, which should be ./Students
+  - Execute the following command. Change the parameters if necessary
+    mvn spring-boot:run -Drun.arguments=--server.port=8080,--database.ip=localhost,--database.port=3306,--database.user=root,--database.password=password,--database.name=my_database
+
+Execute with JAR file:
+  - Open terminal
+  - Navigate to the folder with the JAR file Students-1.0.jar
+  - Execute the following command. Change the parameters if necessary
+    java -jar Students-1.0.jar --server.port=8080 --database.ip=localhost --database.port=3306 --database.user=root --database.password=password --database.name=my_database
+
+---------------------------------------------------------------------------------------------------------
+
+Available requests:
+
+GET student:
+    Fetches a student with specified id
+    URL: GET <host>:<port>/students/<id>
+    Example: GET localhost:8080/students/3
+
+POST student:
+    Inserts a new student into the database
+    URL: POST <host>:<port>/students/
+    Body:
+    {
+      "id": <id of Student>
+      "name": <name of Student>
+      "email": <email of Student>
+    }
+    Example:
+        POST localhost:8080/students/
+        {
+          "id": "3"
+          "name": "Henrik"
+          "email": "Henrik@gmail.com"
+        }
+
+---------------------------------------------------------------------------------------------------------
