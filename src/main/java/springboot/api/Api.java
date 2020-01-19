@@ -19,11 +19,10 @@ import java.util.Optional;
 @RequestMapping(path="/student")
 public class Api {
 
-
     private final static Logger LOG = LoggerFactory.getLogger(Api.class);
 
     @Autowired
-    private static StudentRepository repository;
+    private StudentRepository repository;
 
     @PostMapping(path="/post")
     public ResponseEntity<String> postStudent(@RequestBody @Valid Student student){
@@ -56,15 +55,12 @@ public class Api {
             LOG.debug(message);
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
-
     }
 
     @GetMapping(path="/get/all")
     public ResponseEntity<Object> getAllStudents() {
         LOG.debug("Received GET all students request");
 
-
-        System.out.println(repository);
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 
@@ -107,5 +103,4 @@ public class Api {
     public ResponseEntity<String> tea(){
         return new ResponseEntity<>("I agree. It is time for a tea and fika break", HttpStatus.I_AM_A_TEAPOT);
     }
-
 }
